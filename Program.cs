@@ -14,6 +14,7 @@ namespace BingingOfRandy
 
         public static void Main(string[] args)
         {
+            Console.CursorVisible = false;
             Console.WriteLine("Started BOI");
             Console.WriteLine(drawMap);
 

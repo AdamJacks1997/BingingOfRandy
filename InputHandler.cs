@@ -16,16 +16,16 @@ namespace BingingOfRandy
                 switch (pressedKey)
                 {
                     case "w":
-                        Program.player.y -= 1;
+                        Program.player.Move(0, -1);
                         break;
                     case "s":
-                        Program.player.y += 1;
+                        Program.player.Move(0, 1);
                         break;
                     case "a":
-                        Program.player.x -= 1;
+                        Program.player.Move(-1, 0);
                         break;
                     case "d":
-                        Program.player.x += 1;
+                        Program.player.Move(1, 0);
                         break;
                 }
             }

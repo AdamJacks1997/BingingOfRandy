@@ -14,13 +14,22 @@ namespace BingingOfRandy
             {
                 Console.Clear();
 
+                Program.drawPlayer = true;
+                Program.drawEnemy = true;
+                Program.drawBullet = true;
+
                 Program.drawMap = false;
             }
 
             if (Program.drawPlayer)
             {
+                Console.SetCursorPosition(Program.player.lastX, Program.player.lastY);
+                Console.Write(' ');
                 Console.SetCursorPosition(Program.player.x, Program.player.y);
                 Console.Write('$');
+
+                Program.player.lastX = Program.player.x;
+                Program.player.lastY = Program.player.y;
 
                 Program.drawPlayer = false;
             }
