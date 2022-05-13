@@ -12,6 +12,8 @@ namespace BingingOfRandy
         public int lastY = 0;
         public int x = 0;
         public int y = 0;
+        public int mapX = 20;
+        public int mapY = 20;
         public int health = 10;
         //public int Weapon = default
 

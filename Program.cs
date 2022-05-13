@@ -6,6 +6,7 @@ namespace BingingOfRandy
     {
         public static States state = States.Start;
         public static Player player = new();
+        public Room[,] rooms = new Room[100, 100];
 
         public static bool drawMap = true;
         public static bool drawPlayer = true;
@@ -42,6 +43,18 @@ namespace BingingOfRandy
                         break;
                 }
             }
+        }
+
+        public static int RandomBetween(int min, int max)
+        {
+            Random r = new Random();
+            int newRand = r.Next(min, max);
+            return newRand;
+        }
+
+        public static bool RandomBool()
+        {
+            return RandomBetween(0, 1) == 0 ? true : false;
         }
     }
 }
