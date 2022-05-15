@@ -1,4 +1,5 @@
 ﻿using BingingOfRandy.Enums;
+using BingingOfRandy.Models;
 
 namespace BingingOfRandy
 {
@@ -6,9 +7,10 @@ namespace BingingOfRandy
     {
         public static States state = States.Start;
         public static Player player = new();
-        public Room[,] rooms = new Room[100, 100];
+        public static Room[,] rooms = new Room[100, 100];
+        public static Map map = new Map();
 
-        public static bool drawMap = true;
+        public static bool drawRoom = true;
         public static bool drawPlayer = true;
         public static bool drawEnemy = true;
         public static bool drawBullet = true;
@@ -17,7 +19,8 @@ namespace BingingOfRandy
         {
             Console.CursorVisible = false;
             Console.WriteLine("Started BOI");
-            Console.WriteLine(drawMap);
+
+            map.Generate();
 
             GameLoop();
         }
@@ -58,7 +61,7 @@ namespace BingingOfRandy
 
         public static bool RandomBool()
         {
-            return RandomBetween(0, 1) == 0 ? true : false;
+            return RandomBetween(0, 2) == 0 ? true : false;
         }
     }
 }

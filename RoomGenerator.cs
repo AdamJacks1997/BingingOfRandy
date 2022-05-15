@@ -7,10 +7,9 @@ using System.Threading.Tasks;
 
 namespace BingingOfRandy
 {
-    
     public class RoomGenerator
     {
-        public static char[,] GenerateRoom()
+        public static char[,] Generate()
         {
             int roomSizeX = Program.RandomBetween(11, 21, true);
             int roomSizeY = Program.RandomBetween(11, 21, true);
@@ -34,57 +33,45 @@ namespace BingingOfRandy
             }
 
             return room;
-
         }
 
-        public static void GenerateDoor(char[,] room, Sides side)
+        public static void GenerateDoor(char[,] layout, Sides side)
         {
-            int xCenter = (int)Math.Ceiling((float)room.GetLength(1) / 2) - 1;
-            int yCenter = (int)Math.Ceiling((float)room.GetLength(0) / 2) - 1;
+            int horzCenter = (int)Math.Ceiling((float)layout.GetLength(1) / 2) - 1;
+            int vertCenter = (int)Math.Ceiling((float)layout.GetLength(0) / 2) - 1;
 
             switch (side)
             {
                 case Sides.Top:
-                    AddDoor(room, (0, xCenter));
+                    AddDoor(layout, (0, horzCenter), side);
                     break;
                 case Sides.Bottom:
-                    AddDoor(room, (room.GetLength(1) - 1, xCenter));
+                    AddDoor(layout, (layout.GetLength(0) - 1, horzCenter), side);
                     break;
                 case Sides.Left:
-                    AddDoor(room, (yCenter, 0));
+                    AddDoor(layout, (vertCenter, 0), side);
                     break;
                 case Sides.Right:
-                    AddDoor(room, (yCenter, room.GetLength(0) - 1));
+                    AddDoor(layout, (vertCenter, layout.GetLength(1) - 1), side);
                     break;
             }
         }
 
-        private static void AddDoor(char[,] room, (int y, int x) coords)
+        private static void AddDoor(char[,] layout, (int y, int x) coords, Sides side)
         {
             (int y, int x) = coords;
-            if (x > 0)
+
+            if (side == Sides.Top || side == Sides.Bottom)
             {
-                room[y, x] = ' ';
-                room[y, x - 1] = ' ';
-                room[y, x + 1] = ' ';
-            } else
-            {
-                room[y, x] = ' ';
-                room[y - 1, x] = ' ';
-                room[y + 1, x] = ' ';
+                layout[y, x] = ' ';
+                layout[y, x - 1] = ' ';
+                layout[y, x + 1] = ' ';
             }
-
-        }
-
-        public static void DrawRoom(char[,] room)
-        {
-            for (int i = 0; i < room.GetLength(0); i++)
+            else
             {
-                for (int j = 0; j < room.GetLength(1); j++)
-                {
-                    Console.Write(room[i, j]);
-                }
-                Console.WriteLine();
+                layout[y, x] = ' ';
+                layout[y - 1, x] = ' ';
+                layout[y + 1, x] = ' ';
             }
         }
     }
