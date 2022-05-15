@@ -10,16 +10,19 @@ namespace BingingOfRandy
     
     public class RoomGenerator
     {
-        public static char[,] GenerateRoom(int yLength, int xLength)
+        public static char[,] GenerateRoom()
         {
-            char[,] room = new char[yLength, xLength];
+            int roomSizeX = Program.RandomBetween(11, 21, true);
+            int roomSizeY = Program.RandomBetween(11, 21, true);
 
-            for (int x = 0; x < xLength; x++)
+            char[,] room = new char[roomSizeY, roomSizeX];
+
+            for (int x = 0; x < roomSizeX; x++)
             {
-                for (int y = 0; y < yLength; y++)
+                for (int y = 0; y < roomSizeY; y++)
                 {
                     char c;
-                    if(y == 0 || x== 0 || y == yLength - 1 || x == xLength - 1)
+                    if(y == 0 || x== 0 || y == roomSizeY - 1 || x == roomSizeX - 1)
                     {
                         c = '#';
                     } else
