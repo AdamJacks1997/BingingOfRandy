@@ -42,21 +42,21 @@ namespace BingingOfRandy
             switch (side)
             {
                 case Sides.Top:
-                    WriteDoor(room, (0, xCenter));
+                    AddDoor(room, (0, xCenter));
                     break;
                 case Sides.Bottom:
-                    WriteDoor(room, (room.GetLength(1) - 1, xCenter));
+                    AddDoor(room, (room.GetLength(1) - 1, xCenter));
                     break;
                 case Sides.Left:
-                    WriteDoor(room, (yCenter, 0));
+                    AddDoor(room, (yCenter, 0));
                     break;
                 case Sides.Right:
-                    WriteDoor(room, (yCenter, room.GetLength(0) - 1));
+                    AddDoor(room, (yCenter, room.GetLength(0) - 1));
                     break;
             }
         }
 
-        private static void WriteDoor(char[,] room, (int y, int x) coords)
+        private static void AddDoor(char[,] room, (int y, int x) coords)
         {
             (int y, int x) = coords;
             if (x > 0)
