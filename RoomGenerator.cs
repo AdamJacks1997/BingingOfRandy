@@ -84,10 +84,5 @@ namespace BingingOfRandy
                 Console.WriteLine();
             }
         }
-
-
-
-
-
     }
 }
