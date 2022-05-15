@@ -43,12 +43,16 @@ namespace BingingOfRandy
                         break;
                 }
             }
-        }
 
-        public static int RandomBetween(int min, int max)
+        }
+        public static int RandomBetween(int min, int max, bool isOdd = false)
         {
             Random r = new Random();
             int newRand = r.Next(min, max);
+            if (isOdd && newRand % 2 == 0)
+            {
+                newRand = newRand == max ? newRand -= 1 : newRand += 1;
+            }
             return newRand;
         }
 
