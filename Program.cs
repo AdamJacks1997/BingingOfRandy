@@ -6,9 +6,9 @@ namespace BingingOfRandy
     public static class Program
     {
         public static States state = States.Start;
-        public static Player player = new();
         public static Room[,] rooms = new Room[100, 100];
         public static Map map = new Map();
+        public static Player player;
 
         public static bool drawRoom = true;
         public static bool drawPlayer = true;
@@ -21,6 +21,8 @@ namespace BingingOfRandy
             Console.WriteLine("Started BOI");
 
             map.Generate();
+
+            player = new Player();
 
             GameLoop();
         }

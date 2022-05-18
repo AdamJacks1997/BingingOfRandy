@@ -48,17 +48,21 @@ namespace BingingOfRandy
                 Console.WriteLine();
             }
 
-            Program.drawPlayer = true;
-            Program.drawEnemy = true;
-            Program.drawBullet = true;
+            DrawPlayer(false);
+            DrawEnemy();
+            DrawBullet();
 
             Program.drawRoom = false;
         }
 
-        public static void DrawPlayer()
+        public static void DrawPlayer(bool removeLastPosition = true)
         {
-            Console.SetCursorPosition(Program.player.lastX, Program.player.lastY);
-            Console.Write(' ');
+            if (removeLastPosition)
+            {
+                Console.SetCursorPosition(Program.player.lastX, Program.player.lastY);
+                Console.Write(' ');
+            }
+
             Console.SetCursorPosition(Program.player.x, Program.player.y);
             Console.Write('$');
 
@@ -66,6 +70,16 @@ namespace BingingOfRandy
             Program.player.lastY = Program.player.y;
 
             Program.drawPlayer = false;
+        }
+
+        public static void DrawEnemy()
+        {
+
+        }
+
+        public static void DrawBullet()
+        {
+
         }
     }
 }
