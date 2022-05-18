@@ -22,7 +22,7 @@ namespace BingingOfRandy
 
             if (room.layout[y, x] == 'O')
             {
-                return Colliders.Wall;
+                return Colliders.Hole;
             }
 
             if (player.x == x && player.y == y)
