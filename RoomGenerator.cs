@@ -2,6 +2,7 @@
 
 namespace BingingOfRandy
 {
+
     public class RoomGenerator
     {
         public static char[,] Generate()
@@ -16,7 +17,7 @@ namespace BingingOfRandy
                 for (int y = 0; y < roomSizeY; y++)
                 {
                     char c;
-                    if(y == 0 || x== 0 || y == roomSizeY - 1 || x == roomSizeX - 1)
+                    if (y == 0 || x == 0 || y == roomSizeY - 1 || x == roomSizeX - 1)
                     {
                         c = '#';
                     }
@@ -26,6 +27,19 @@ namespace BingingOfRandy
                     }
                     room[y, x] = c;
                 }
+            }
+
+            int roomArea = roomSizeX * roomSizeY;
+            int obstacleCount = 2;
+
+            if(roomArea > 300)
+            {
+                obstacleCount = 3;
+            }
+
+            for(int i = 0; i < obstacleCount; i++)
+            {
+                AddObstacle(room, Program.RandomBool());
             }
 
             room = GenerateHealth(room);
@@ -97,6 +111,40 @@ namespace BingingOfRandy
                 layout[y, x] = ' ';
                 layout[y - 1, x] = ' ';
                 layout[y + 1, x] = ' ';
+            }
+        }
+
+        private static void AddObstacle(char[,] room, bool isHole)
+        {
+            int yLength = room.GetLength(0);
+            int xLength = room.GetLength(1);
+
+            int xObstacleStart = Program.RandomBetween(1, xLength - 2);
+            int yObstacleStart = Program.RandomBetween(1, yLength - 2);
+
+            char obstacle = isHole ? 'O' : '#';
+
+            room[yObstacleStart, xObstacleStart] = obstacle;
+
+            for (int i = 0; i < 3; i++)
+            {
+                Sides direction = (Sides)Program.RandomBetween(0, 3);
+                switch (direction)
+                {
+                    case (Sides.Top):
+                        if (yObstacleStart > 3 && yObstacleStart < yLength - 3) yObstacleStart++;
+                        break;
+                    case (Sides.Bottom):
+                        if (yObstacleStart < yLength - 3 && yObstacleStart > 3) yObstacleStart--;
+                        break;
+                    case (Sides.Left):
+                        if (xObstacleStart > 3 && xObstacleStart < xLength - 3) xObstacleStart--;
+                        break;
+                    case (Sides.Right):
+                        if (xObstacleStart < xLength - 3 && xObstacleStart > 3) xObstacleStart++;
+                        break;
+                }
+                room[yObstacleStart, xObstacleStart] = obstacle;
             }
         }
     }
