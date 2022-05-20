@@ -74,12 +74,15 @@ namespace BingingOfRandy
             var collider = Collision.Check(this.x + x, this.y + y);
 
             if (collider is Colliders.Wall or Colliders.Enemy)
-            {
                 return;
-            }
-            else if (collider is Colliders.Hole)
-            {
+
+            if (collider is Colliders.Hole)
                 health = 0;
+
+            if (collider is Colliders.Health)
+            {
+                health += 10 <= 100 ? health += 10 : health = 100;
+                Program.rooms[mapX, mapY].layout[this.y + y, this.x + x] = ' ';
             }
 
             this.x += x;

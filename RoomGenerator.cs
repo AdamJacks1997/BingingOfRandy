@@ -1,12 +1,8 @@
 ﻿using BingingOfRandy.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BingingOfRandy
 {
+
     public class RoomGenerator
     {
         public static char[,] Generate()
@@ -21,10 +17,11 @@ namespace BingingOfRandy
                 for (int y = 0; y < roomSizeY; y++)
                 {
                     char c;
-                    if(y == 0 || x== 0 || y == roomSizeY - 1 || x == roomSizeX - 1)
+                    if (y == 0 || x == 0 || y == roomSizeY - 1 || x == roomSizeX - 1)
                     {
                         c = '#';
-                    } else
+                    }
+                    else
                     {
                         c = ' ';
                     }
@@ -32,7 +29,49 @@ namespace BingingOfRandy
                 }
             }
 
+            int roomArea = roomSizeX * roomSizeY;
+            int obstacleCount = 2;
+
+            if(roomArea > 300)
+            {
+                obstacleCount = 3;
+            }
+
+            for(int i = 0; i < obstacleCount; i++)
+            {
+                AddObstacle(room, Program.RandomBool());
+            }
+
+            room = GenerateHealth(room);
+
             return room;
+        }
+
+        private static char[,] GenerateHealth(char[,] room)
+        {
+            var healthAmount = Program.RandomBetween(0, 3);
+            
+            for (int x = 0; x < healthAmount; x++)
+            {
+                var position = GetRandomPosition(room);
+
+                room[position.y, position.x] = 'H';
+            }
+
+            return room;
+        }
+
+        public static (int x, int y) GetRandomPosition(char[,] room)
+        {
+            var x = Program.RandomBetween(1, room.GetLength(0) - 1);
+            var y = Program.RandomBetween(1, room.GetLength(1) - 1);
+
+            if (Collision.CheckRoom(room, y, x) is Colliders.Wall or Colliders.Hole)
+            {
+                return GetRandomPosition(room);
+            }
+
+            return (y, x);
         }
 
         public static void GenerateDoor(char[,] layout, Sides side)
@@ -72,6 +111,40 @@ namespace BingingOfRandy
                 layout[y, x] = ' ';
                 layout[y - 1, x] = ' ';
                 layout[y + 1, x] = ' ';
+            }
+        }
+
+        private static void AddObstacle(char[,] room, bool isHole)
+        {
+            int yLength = room.GetLength(0);
+            int xLength = room.GetLength(1);
+
+            int xObstacleStart = Program.RandomBetween(1, xLength - 2);
+            int yObstacleStart = Program.RandomBetween(1, yLength - 2);
+
+            char obstacle = isHole ? 'O' : '#';
+
+            room[yObstacleStart, xObstacleStart] = obstacle;
+
+            for (int i = 0; i < 3; i++)
+            {
+                Sides direction = (Sides)Program.RandomBetween(0, 3);
+                switch (direction)
+                {
+                    case (Sides.Top):
+                        if (yObstacleStart > 3 && yObstacleStart < yLength - 3) yObstacleStart++;
+                        break;
+                    case (Sides.Bottom):
+                        if (yObstacleStart < yLength - 3 && yObstacleStart > 3) yObstacleStart--;
+                        break;
+                    case (Sides.Left):
+                        if (xObstacleStart > 3 && xObstacleStart < xLength - 3) xObstacleStart--;
+                        break;
+                    case (Sides.Right):
+                        if (xObstacleStart < xLength - 3 && xObstacleStart > 3) xObstacleStart++;
+                        break;
+                }
+                room[yObstacleStart, xObstacleStart] = obstacle;
             }
         }
     }
