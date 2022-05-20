@@ -68,7 +68,7 @@ namespace BingingOfRandy
 
             if (Collision.CheckRoom(room, y, x) is Colliders.Wall or Colliders.Hole)
             {
-                GetRandomPosition(room);
+                return GetRandomPosition(room);
             }
 
             return (y, x);
