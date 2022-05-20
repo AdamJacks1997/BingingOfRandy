@@ -30,6 +30,16 @@ namespace BingingOfRandy
                 return Colliders.Player;
             }
 
+            if (player.x == x && player.y == y)
+            {
+                return Colliders.Player;
+            }
+
+            if (room.layout[y, x] == 'H')
+            {
+                return Colliders.Health;
+            }
+
             // check if coords match any enemy in current room
 
             return Colliders.None;

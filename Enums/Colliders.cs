@@ -11,6 +11,7 @@ namespace BingingOfRandy.Enums
         Player,
         Enemy,
         Bullet,
+        Health,
         Wall,
         Hole,
         None
