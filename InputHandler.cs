@@ -10,9 +10,11 @@ namespace BingingOfRandy
     {
         public static void Refresh()
         {
+
             if (Console.KeyAvailable)
             {
                 string pressedKey = Convert.ToString(Console.ReadKey(true).KeyChar);
+
                 switch (pressedKey)
                 {
                     case "w":

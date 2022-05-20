@@ -10,7 +10,7 @@ namespace BingingOfRandy
 
     public class RoomGenerator
     {
-        public static char[,] GenerateRoom()
+        public static char[,] Generate()
         {
             int roomSizeX = Program.RandomBetween(11, 21, true);
             int roomSizeY = Program.RandomBetween(11, 21, true);
@@ -44,53 +44,53 @@ namespace BingingOfRandy
 
             for(int i = 0; i < obstacleCount; i++)
             {
-                AddObstacle(room);
+                AddObstacle(room, Program.RandomBool());
             }
             
             return room;
         }
 
-        public static void GenerateDoor(char[,] room, Sides side)
+        public static void GenerateDoor(char[,] layout, Sides side)
         {
-            int xCenter = (int)Math.Ceiling((float)room.GetLength(1) / 2) - 1;
-            int yCenter = (int)Math.Ceiling((float)room.GetLength(0) / 2) - 1;
+            int horzCenter = (int)Math.Ceiling((float)layout.GetLength(1) / 2) - 1;
+            int vertCenter = (int)Math.Ceiling((float)layout.GetLength(0) / 2) - 1;
 
             switch (side)
             {
                 case Sides.Top:
-                    AddDoor(room, (0, xCenter), side);
+                    AddDoor(layout, (0, horzCenter), side);
                     break;
                 case Sides.Bottom:
-                    AddDoor(room, (room.GetLength(0) - 1, xCenter), side);
+                    AddDoor(layout, (layout.GetLength(0) - 1, horzCenter), side);
                     break;
                 case Sides.Left:
-                    AddDoor(room, (yCenter, 0), side);
+                    AddDoor(layout, (vertCenter, 0), side);
                     break;
                 case Sides.Right:
-                    AddDoor(room, (yCenter, room.GetLength(1) - 1), side);
+                    AddDoor(layout, (vertCenter, layout.GetLength(1) - 1), side);
                     break;
             }
         }
 
-        private static void AddDoor(char[,] room, (int y, int x) coords, Sides side)
+        private static void AddDoor(char[,] layout, (int y, int x) coords, Sides side)
         {
             (int y, int x) = coords;
 
             if (side == Sides.Top || side == Sides.Bottom)
             {
-                room[y, x] = ' ';
-                room[y, x - 1] = ' ';
-                room[y, x + 1] = ' ';
+                layout[y, x] = ' ';
+                layout[y, x - 1] = ' ';
+                layout[y, x + 1] = ' ';
             }
             else
             {
-                room[y, x] = ' ';
-                room[y - 1, x] = ' ';
-                room[y + 1, x] = ' ';
+                layout[y, x] = ' ';
+                layout[y - 1, x] = ' ';
+                layout[y + 1, x] = ' ';
             }
         }
 
-        private static void AddObstacle(char[,] room)
+        private static void AddObstacle(char[,] room, bool isHole)
         {
             int yLength = room.GetLength(0);
             int xLength = room.GetLength(1);
@@ -98,7 +98,9 @@ namespace BingingOfRandy
             int xObstacleStart = Program.RandomBetween(1, xLength - 2);
             int yObstacleStart = Program.RandomBetween(1, yLength - 2);
 
-            room[yObstacleStart, xObstacleStart] = 'O';
+            char obstacle = isHole ? 'O' : '#';
+
+            room[yObstacleStart, xObstacleStart] = obstacle;
 
             for (int i = 0; i < 3; i++)
             {
@@ -131,21 +133,7 @@ namespace BingingOfRandy
                         break;
 
                 }
-                room[yObstacleStart, xObstacleStart] = 'O';
-            }
-        }
-
-
-
-        public static void DrawRoom(char[,] room)
-        {
-            for (int i = 0; i < room.GetLength(0); i++)
-            {
-                for (int j = 0; j < room.GetLength(1); j++)
-                {
-                    Console.Write(room[i, j]);
-                }
-                Console.WriteLine();
+                room[yObstacleStart, xObstacleStart] = obstacle;
             }
         }
     }
