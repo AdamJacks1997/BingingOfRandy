@@ -108,30 +108,17 @@ namespace BingingOfRandy
                 switch (direction)
                 {
                     case (Sides.Top):
-                        if (yObstacleStart > 3 && yObstacleStart < yLength - 3)
-                        {
-                            yObstacleStart++;
-                        }
+                        if (yObstacleStart > 3 && yObstacleStart < yLength - 3) yObstacleStart++;
                         break;
                     case (Sides.Bottom):
-                        if (yObstacleStart < yLength - 3 && yObstacleStart > 3)
-                        {
-                            yObstacleStart--;
-                        }
+                        if (yObstacleStart < yLength - 3 && yObstacleStart > 3) yObstacleStart--;
                         break;
                     case (Sides.Left):
-                        if (xObstacleStart > 3 && xObstacleStart < xLength - 3)
-                        {
-                            xObstacleStart--;
-                        }
+                        if (xObstacleStart > 3 && xObstacleStart < xLength - 3) xObstacleStart--;
                         break;
                     case (Sides.Right):
-                        if (xObstacleStart < xLength - 3 && xObstacleStart > 3)
-                        {
-                            xObstacleStart++;
-                        }
+                        if (xObstacleStart < xLength - 3 && xObstacleStart > 3) xObstacleStart++;
                         break;
-
                 }
                 room[yObstacleStart, xObstacleStart] = obstacle;
             }
