@@ -34,5 +34,22 @@ namespace BingingOfRandy
 
             return Colliders.None;
         }
+
+        public static Colliders CheckRoom(char[,] room, int x, int y)
+        {
+            if (room[y, x] == '#')
+            {
+                return Colliders.Wall;
+            }
+
+            if (room[y, x] == 'O')
+            {
+                return Colliders.Hole;
+            }
+
+            // check if coords match any enemy in current room
+
+            return Colliders.None;
+        }
     }
 }

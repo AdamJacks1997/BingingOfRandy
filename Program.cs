@@ -41,6 +41,8 @@ namespace BingingOfRandy
                         InputHandler.Refresh();
                         Draw.Refresh();
                         Thread.Sleep(100);
+                        if (player.health <= 0)
+                            state = States.Dead;
                         break;
                     case States.Dead:
                         break;
@@ -55,9 +57,8 @@ namespace BingingOfRandy
             Random r = new Random();
             int newRand = r.Next(min, max);
             if (isOdd && newRand % 2 == 0)
-            {
                 newRand = newRand == max ? newRand -= 1 : newRand += 1;
-            }
+
             return newRand;
         }
 
