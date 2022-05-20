@@ -1,9 +1,4 @@
 ﻿using BingingOfRandy.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BingingOfRandy
 {
@@ -46,8 +41,37 @@ namespace BingingOfRandy
             {
                 AddObstacle(room, Program.RandomBool());
             }
-            
+
+            room = GenerateHealth(room);
+
             return room;
+        }
+
+        private static char[,] GenerateHealth(char[,] room)
+        {
+            var healthAmount = Program.RandomBetween(0, 3);
+            
+            for (int x = 0; x < healthAmount; x++)
+            {
+                var position = GetRandomPosition(room);
+
+                room[position.y, position.x] = 'H';
+            }
+
+            return room;
+        }
+
+        public static (int x, int y) GetRandomPosition(char[,] room)
+        {
+            var x = Program.RandomBetween(1, room.GetLength(0) - 1);
+            var y = Program.RandomBetween(1, room.GetLength(1) - 1);
+
+            if (Collision.CheckRoom(room, y, x) is Colliders.Wall or Colliders.Hole)
+            {
+                return GetRandomPosition(room);
+            }
+
+            return (y, x);
         }
 
         public static void GenerateDoor(char[,] layout, Sides side)
