@@ -44,7 +44,7 @@ namespace BingingOfRandy
             }
 
         }
-            public static int RandomBetween(int min, int max, bool isOdd)
+            public static int RandomBetween(int min, int max, bool isOdd = false)
             {
                 Random r = new Random();
                 int newRand = r.Next(min, max);
