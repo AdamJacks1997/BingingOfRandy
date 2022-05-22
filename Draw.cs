@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BingingOfRandy.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -36,6 +37,8 @@ namespace BingingOfRandy
             {
                 DrawGui();
             }
+
+            DrawBullets();
         }
 
         public static void StartScreen()
@@ -102,7 +105,7 @@ namespace BingingOfRandy
 
             DrawPlayer(false);
             DrawEnemy();
-            DrawBullet();
+            DrawBullets();
             DrawGui();
 
             Program.drawRoom = false;
@@ -162,9 +165,16 @@ namespace BingingOfRandy
             Program.drawEnemy = false;
         }
 
-        public static void DrawBullet()
+        public static void DrawBullets()
         {
+            foreach(var bullet in BulletHandler.bullets)
+            {
+                Console.SetCursorPosition(bullet.x, bullet.y);
+                Console.Write('o');
 
+                Console.SetCursorPosition(bullet.lastX, bullet.lastY);
+                Console.Write(bullet.crossedOver);
+            }
         }
     }
 }
