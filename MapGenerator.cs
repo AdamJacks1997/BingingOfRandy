@@ -144,7 +144,7 @@ namespace BingingOfRandy
                 pathNumber = pathNumber,
                 pathConnectList = new List<int>(),
                 layout = RoomGenerator.Generate(),
-                enemiesToSpawn = roomsList.Count != 0 ? Program.RandomBetween(1, 3) : 0
+                enemiesToSpawn = roomsList.Count != 0 ? Program.RandomBetween(1, 4) : 0
             };
 
             if (isFirst)

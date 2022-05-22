@@ -48,7 +48,7 @@ namespace BingingOfRandy
 
         private static char[,] GenerateHealth(char[,] room)
         {
-            var healthAmount = Program.RandomBetween(0, 3);
+            var healthAmount = Program.RandomBetween(0, 2);
 
             for (int x = 0; x < healthAmount; x++)
             {

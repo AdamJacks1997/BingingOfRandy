@@ -127,6 +127,9 @@ namespace BingingOfRandy
 
             Console.SetCursorPosition(guiStartX, guiStartY + 2);
             Console.Write("Health: " + Program.player.health);
+
+            Console.SetCursorPosition(guiStartX, guiStartY + 4);
+            Console.Write("Enemies: " + EnemyHandler.EnemyCount());
         }
 
         public static void DrawPlayer(bool removeLastPosition = true)
