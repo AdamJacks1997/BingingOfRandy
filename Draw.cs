@@ -30,7 +30,7 @@ namespace BingingOfRandy
 
             if (Program.drawEnemy)
             {
-                Program.drawEnemy = false;
+                DrawEnemy();
             }
 
             if (Program.drawGui)
@@ -127,6 +127,9 @@ namespace BingingOfRandy
 
             Console.SetCursorPosition(guiStartX, guiStartY + 2);
             Console.Write("Health: " + Program.player.health);
+
+            Console.SetCursorPosition(guiStartX, guiStartY + 4);
+            Console.Write("Enemies: " + EnemyHandler.EnemyCount());
         }
 
         public static void DrawPlayer(bool removeLastPosition = true)
@@ -148,7 +151,21 @@ namespace BingingOfRandy
 
         public static void DrawEnemy()
         {
+            var room = Program.rooms[Program.player.mapX, Program.player.mapY];
 
+            foreach(var enemy in room.enemies)
+            {
+                Console.SetCursorPosition(enemy.lastX, enemy.lastY);
+                Console.Write(' ');
+
+                Console.SetCursorPosition(enemy.x, enemy.y);
+                Console.Write('@');
+
+                enemy.lastX = enemy.x;
+                enemy.lastY = enemy.y;
+            }
+
+            Program.drawEnemy = false;
         }
 
         public static void DrawBullets()

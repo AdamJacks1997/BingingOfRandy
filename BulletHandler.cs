@@ -45,9 +45,10 @@ namespace BingingOfRandy.Models
         {
             bullet.lastY = bullet.y;
             bullet.lastX = bullet.x;
-            char[,] layout = Program.rooms[Program.player.mapX, Program.player.mapY].layout;
+            var room = Program.rooms[Program.player.mapX, Program.player.mapY];
+            var roomLayout = room.layout;
 
-            if (nextY < 0 || nextY >= layout.GetLength(0) || nextX >= layout.GetLength(1) || nextX < 0)
+            if (nextY < 0 || nextY >= roomLayout.GetLength(0) || nextX >= roomLayout.GetLength(1) || nextX < 0)
             {
                 DeleteBullet(bullet);
                 return;
@@ -60,12 +61,27 @@ namespace BingingOfRandy.Models
                 //Deal with bullet hitting stuff
                 if (collider is Colliders.Player)
                 {
-                    Program.player.health -= 10;
+                    Program.player.health -= 25;
+                    Program.drawGui = true;
                 }
 
                 if (collider is Colliders.Enemy)
                 {
-                    //Damage enemy
+                    var enemy = room.enemies.Single(e => e.x == nextX && e.y == nextY);
+
+                    enemy.health -= 25;
+
+                    if (enemy.health <= 0)
+                    {
+                        room.enemies.Remove(enemy);
+
+                        if (EnemyHandler.EnemyCount() == 0)
+                        {
+                            Program.state = States.Finish;
+                        }
+                    }
+
+                    Program.drawGui = true;
                 }
 
                 DeleteBullet(bullet);

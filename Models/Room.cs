@@ -13,5 +13,7 @@ namespace BingingOfRandy.Models
         public int pathNumber;
         public List<int> pathConnectList;
         public char[,] layout;
+        public int enemiesToSpawn;
+        public List<Enemy> enemies;
     }
 }

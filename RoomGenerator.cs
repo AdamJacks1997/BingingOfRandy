@@ -2,7 +2,6 @@
 
 namespace BingingOfRandy
 {
-
     public class RoomGenerator
     {
         public static char[,] Generate()
@@ -32,12 +31,12 @@ namespace BingingOfRandy
             int roomArea = roomSizeX * roomSizeY;
             int obstacleCount = 2;
 
-            if(roomArea > 300)
+            if (roomArea > 300)
             {
                 obstacleCount = 3;
             }
 
-            for(int i = 0; i < obstacleCount; i++)
+            for (int i = 0; i < obstacleCount; i++)
             {
                 AddObstacle(room, Program.RandomBool());
             }
@@ -49,8 +48,8 @@ namespace BingingOfRandy
 
         private static char[,] GenerateHealth(char[,] room)
         {
-            var healthAmount = Program.RandomBetween(0, 3);
-            
+            var healthAmount = Program.RandomBetween(0, 2);
+
             for (int x = 0; x < healthAmount; x++)
             {
                 var position = GetRandomPosition(room);

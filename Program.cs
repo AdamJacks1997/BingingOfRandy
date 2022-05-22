@@ -40,6 +40,7 @@ namespace BingingOfRandy
                         break;
                     case States.Play:
                         InputHandler.Refresh();
+                        EnemyHandler.MoveNShoot();
                         BulletHandler.MoveBullets();
                         Draw.Refresh();
                         BulletHandler.ClearBullets();

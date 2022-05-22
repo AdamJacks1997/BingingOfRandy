@@ -20,7 +20,8 @@ namespace BingingOfRandy
 
         internal void Move(int x, int y)
         {
-            var roomLayout = Program.rooms[mapX, mapY].layout;
+            var room = Program.rooms[mapX, mapY];
+            var roomLayout = room.layout;
 
             // is player moving to next room?
             if (this.y == 0 && y == -1) // up
@@ -86,8 +87,11 @@ namespace BingingOfRandy
 
             if (collider is Colliders.Health)
             {
-                health += 10 <= 100 ? health += 10 : health = 100;
+                health += 10;
+                if (health > 100)
+                    health = 100;
                 Program.rooms[mapX, mapY].layout[this.y + y, this.x + x] = ' ';
+                Program.drawGui = true;
             }
 
             this.x += x;
