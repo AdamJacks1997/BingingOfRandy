@@ -26,6 +26,5 @@ namespace BingingOfRandy.Models
             lastY = y;
             onTopOf = (char)Collision.Check(x, y);
         }
-
     }
 }
