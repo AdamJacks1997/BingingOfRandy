@@ -29,7 +29,7 @@ namespace BingingOfRandy
 
             if (Program.drawEnemy)
             {
-                Program.drawEnemy = false;
+                DrawEnemy();
             }
 
             if (Program.drawGui)
@@ -145,7 +145,21 @@ namespace BingingOfRandy
 
         public static void DrawEnemy()
         {
+            var room = Program.rooms[Program.player.mapX, Program.player.mapY];
 
+            foreach(var enemy in room.enemies)
+            {
+                Console.SetCursorPosition(enemy.lastX, enemy.lastY);
+                Console.Write(' ');
+
+                Console.SetCursorPosition(enemy.x, enemy.y);
+                Console.Write('@');
+
+                enemy.lastX = enemy.x;
+                enemy.lastY = enemy.y;
+            }
+
+            Program.drawEnemy = false;
         }
 
         public static void DrawBullet()

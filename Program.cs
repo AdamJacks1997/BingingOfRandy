@@ -39,6 +39,7 @@ namespace BingingOfRandy
                         break;
                     case States.Play:
                         InputHandler.Refresh();
+                        EnemyHandler.MoveNShoot();
                         Draw.Refresh();
                         Thread.Sleep(100);
                         if (player.health <= 0)
