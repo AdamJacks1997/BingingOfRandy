@@ -14,12 +14,11 @@ namespace BingingOfRandy
         public static bool drawRoom = true;
         public static bool drawPlayer = true;
         public static bool drawEnemy = true;
-        public static bool drawBullet = true;
+        public static bool drawGui = true;
 
         public static void Main(string[] args)
         {
             Console.CursorVisible = false;
-            Console.WriteLine("Started BOI");
 
             map.Generate();
 
@@ -30,13 +29,14 @@ namespace BingingOfRandy
 
         public static void GameLoop()
         {
-            state = States.Play; // REMOVE WHEN START GUI IS MADE
-
             while (true)
             {
                 switch (state)
                 {
                     case States.Start:
+                        Draw.StartScreen();
+                        Console.ReadKey(true);
+                        restart();
                         break;
                     case States.Play:
                         InputHandler.Refresh();
@@ -48,13 +48,30 @@ namespace BingingOfRandy
                             state = States.Dead;
                         break;
                     case States.Dead:
+                        Draw.DeathScreen();
+                        Console.ReadKey(true);
+                        restart();
                         break;
                     case States.Finish:
+                        Draw.FinishScreen();
+                        Console.ReadKey(true);
+                        restart();
                         break;
                 }
             }
-
         }
+
+        public static void restart()
+        {
+            rooms = new Room[100, 100];
+            map = new Map();
+            map.Generate();
+            player = new Player();
+            Thread.Sleep(1000);
+            state = States.Play;
+            drawRoom = true;
+        }
+
         public static int RandomBetween(int min, int max, bool isOdd = false)
         {
             Random r = new Random();

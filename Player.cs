@@ -17,7 +17,6 @@ namespace BingingOfRandy
         public int mapX = 50;
         public int mapY = 50;
         public int health = 100;
-        //public int Weapon = default
 
         internal void Move(int x, int y)
         {
@@ -83,6 +82,7 @@ namespace BingingOfRandy
 
             if (collider is Colliders.Hole)
                 health = 0;
+                Program.drawGui = true;
 
             if (collider is Colliders.Health)
             {
@@ -94,36 +94,6 @@ namespace BingingOfRandy
             this.y += y;
 
             Program.drawPlayer = true;
-        }
-
-        internal void Shoot(Directions direction)
-        {
-
-            int startX = 0;
-            int startY = 0;
-
-            switch(direction)
-            {
-                case Directions.Up:
-                    startX = x;
-                    startY = y - 1;
-                    break;
-                case Directions.Down:
-                    startX = x;
-                    startY = y + 1;
-                    break;
-                case Directions.Right:
-                    startX = x + 1;
-                    startY = y;
-                    break;
-                case Directions.Left:
-                    startX = x - 1;
-                    startY = y;
-                    break;
-            }
-
-            var bullet = new Bullet(direction, startX, startY);
-            BulletHandler.bullets.Add(bullet);
         }
 
         internal void Damage(int damageAmount)
