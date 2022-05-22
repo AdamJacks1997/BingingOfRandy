@@ -16,7 +16,7 @@ namespace BingingOfRandy.Models
 
             foreach (var enemy in room.enemies)
             {
-                var chanceToMoveOrShoot = Program.RandomBetween(0, 3);
+                var chanceToMoveOrShoot = Program.RandomBetween(0, 6);
 
                 if (chanceToMoveOrShoot != 0)
                 {
@@ -62,7 +62,7 @@ namespace BingingOfRandy.Models
 
                     var collider = Collision.Check(enemy.x + x, enemy.y + y);
 
-                    if (collider is Colliders.Wall or Colliders.Hole or Colliders.Player or Colliders.Enemy)
+                    if (collider is Colliders.Wall or Colliders.Hole or Colliders.Player or Colliders.Enemy or Colliders.Health)
                         return;
 
                     enemy.x += x;
