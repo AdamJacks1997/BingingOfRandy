@@ -1,4 +1,5 @@
 ﻿using BingingOfRandy.Enums;
+using BingingOfRandy.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,16 +32,16 @@ namespace BingingOfRandy
                         Program.player.Move(1, 0);
                         break;
                     case "i":
-                        Program.player.Shoot(Directions.Up);
+                        BulletHandler.Shoot(Directions.Up, Program.player.x, Program.player.y);
                         break;
                     case "j":
-                        Program.player.Shoot(Directions.Left);
+                        BulletHandler.Shoot(Directions.Left, Program.player.x, Program.player.y);
                         break;
                     case "k":
-                        Program.player.Shoot(Directions.Down);
+                        BulletHandler.Shoot(Directions.Down, Program.player.x, Program.player.y);
                         break;
                     case "l":
-                        Program.player.Shoot(Directions.Right);
+                        BulletHandler.Shoot(Directions.Right, Program.player.x, Program.player.y);
                         break;
                 }
             }
