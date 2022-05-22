@@ -17,28 +17,33 @@ namespace BingingOfRandy.Models
             foreach (var enemy in room.enemies)
             {
                 var chanceToMoveOrShoot = Program.RandomBetween(0, 6);
+                var direction = Program.RandomBetween(0, 4);
+                var x = 0;
+                var y = 0;
+                var directionEnum = Directions.Up;
 
-                if (chanceToMoveOrShoot != 0)
+                switch (direction)
                 {
-                    var direction = Program.RandomBetween(0, 4);
-                    var x = 0;
-                    var y = 0;
+                    case 0:
+                        y -= 1;
+                        directionEnum = Directions.Up;
+                        break;
+                    case 1:
+                        x += 1;
+                        directionEnum = Directions.Right;
+                        break;
+                    case 2:
+                        y += 1;
+                        directionEnum = Directions.Down;
+                        break;
+                    case 3:
+                        x -= 1;
+                        directionEnum = Directions.Left;
+                        break;
+                }
 
-                    switch (direction)
-                    {
-                        case 0:
-                            y -= 1;
-                            break;
-                        case 1:
-                            x += 1;
-                            break;
-                        case 2:
-                            y += 1;
-                            break;
-                        case 3:
-                            x -= 1;
-                            break;
-                    }
+                if (chanceToMoveOrShoot == 0)
+                {
 
                     if (enemy.y == 0 && y == -1) // up
                     {
@@ -68,9 +73,9 @@ namespace BingingOfRandy.Models
                     enemy.x += x;
                     enemy.y += y;
                 }
-                else if (chanceToMoveOrShoot != 0)
+                else if (chanceToMoveOrShoot == 1)
                 {
-                    //shoot??????!!!!!!!! TOOOOOOMMMMMM??!!!! :O 8===========D
+                    BulletHandler.Shoot(directionEnum, enemy.x, enemy.y);
                 }
             }
 
