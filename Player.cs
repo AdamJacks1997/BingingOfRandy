@@ -96,9 +96,34 @@ namespace BingingOfRandy
             Program.drawPlayer = true;
         }
 
-        internal void Damage(int damageAmount)
+        internal void Shoot(Directions direction)
         {
-            health += damageAmount;
+
+            int startX = 0;
+            int startY = 0;
+
+            switch (direction)
+            {
+                case Directions.Up:
+                    startX = x;
+                    startY = y - 1;
+                    break;
+                case Directions.Down:
+                    startX = x;
+                    startY = y + 1;
+                    break;
+                case Directions.Right:
+                    startX = x + 1;
+                    startY = y;
+                    break;
+                case Directions.Left:
+                    startX = x - 1;
+                    startY = y;
+                    break;
+            }
+
+            var bullet = new Bullet(direction, startX, startY);
+            BulletHandler.bullets.Add(bullet);
         }
     }
 }
