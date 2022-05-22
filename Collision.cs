@@ -30,11 +30,6 @@ namespace BingingOfRandy
                 return Colliders.Player;
             }
 
-            if (player.x == x && player.y == y)
-            {
-                return Colliders.Player;
-            }
-
             if (room.layout[y, x] == 'H')
             {
                 return Colliders.Health;

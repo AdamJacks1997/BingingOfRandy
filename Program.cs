@@ -9,6 +9,7 @@ namespace BingingOfRandy
         public static Room[,] rooms = new Room[100, 100];
         public static Map map = new Map();
         public static Player player;
+        
 
         public static bool drawRoom = true;
         public static bool drawPlayer = true;
@@ -39,7 +40,9 @@ namespace BingingOfRandy
                         break;
                     case States.Play:
                         InputHandler.Refresh();
+                        BulletHandler.MoveBullets();
                         Draw.Refresh();
+                        BulletHandler.ClearBullets();
                         Thread.Sleep(100);
                         if (player.health <= 0)
                             state = States.Dead;
@@ -68,7 +71,6 @@ namespace BingingOfRandy
         }
     }
 }
-
 
 
 

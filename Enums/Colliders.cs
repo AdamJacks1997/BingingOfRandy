@@ -8,12 +8,12 @@ namespace BingingOfRandy.Enums
 {
     public enum Colliders
     {
-        Player,
+        Player = '$',
         Enemy,
-        Bullet,
-        Health,
-        Wall,
-        Hole,
-        None
+        Bullet = 'o',
+        Health = 'H',
+        Wall = '#',
+        Hole = 'O',
+        None = ' '
     }
 }

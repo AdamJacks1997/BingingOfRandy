@@ -1,4 +1,5 @@
 ﻿using BingingOfRandy.Enums;
+using BingingOfRandy.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +28,7 @@ namespace BingingOfRandy
             {
                 mapY += y;
                 roomLayout = Program.rooms[mapX, mapY].layout;
+                BulletHandler.bullets.Clear();
 
                 this.x = (int)Math.Ceiling((float)roomLayout.GetLength(1) / 2) - 1;
                 this.y = roomLayout.GetLength(0) - 1;
@@ -39,6 +41,7 @@ namespace BingingOfRandy
             {
                 mapX += x;
                 roomLayout = Program.rooms[mapX, mapY].layout;
+                BulletHandler.bullets.Clear();
 
                 this.x = 0;
                 this.y = (int)Math.Ceiling((float)roomLayout.GetLength(0) / 2) - 1;
@@ -51,6 +54,7 @@ namespace BingingOfRandy
             {
                 mapY += y;
                 roomLayout = Program.rooms[mapX, mapY].layout;
+                BulletHandler.bullets.Clear();
 
                 this.x = (int)Math.Ceiling((float)roomLayout.GetLength(1) / 2) - 1;
                 this.y = 0;
@@ -63,6 +67,7 @@ namespace BingingOfRandy
             {
                 mapX += x;
                 roomLayout = Program.rooms[mapX, mapY].layout;
+                BulletHandler.bullets.Clear();
 
                 this.x = roomLayout.GetLength(1) - 1;
                 this.y = (int)Math.Ceiling((float)roomLayout.GetLength(0) / 2) - 1;
@@ -89,6 +94,36 @@ namespace BingingOfRandy
             this.y += y;
 
             Program.drawPlayer = true;
+        }
+
+        internal void Shoot(Directions direction)
+        {
+
+            int startX = 0;
+            int startY = 0;
+
+            switch(direction)
+            {
+                case Directions.Up:
+                    startX = x;
+                    startY = y - 1;
+                    break;
+                case Directions.Down:
+                    startX = x;
+                    startY = y + 1;
+                    break;
+                case Directions.Right:
+                    startX = x + 1;
+                    startY = y;
+                    break;
+                case Directions.Left:
+                    startX = x - 1;
+                    startY = y;
+                    break;
+            }
+
+            var bullet = new Bullet(direction, startX, startY);
+            BulletHandler.bullets.Add(bullet);
         }
 
         internal void Damage(int damageAmount)
