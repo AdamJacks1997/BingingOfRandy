@@ -1,4 +1,5 @@
 ﻿using BingingOfRandy.Enums;
+using BingingOfRandy.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +27,7 @@ namespace BingingOfRandy
             {
                 mapY += y;
                 roomLayout = Program.rooms[mapX, mapY].layout;
+                BulletHandler.bullets.Clear();
 
                 this.x = (int)Math.Ceiling((float)roomLayout.GetLength(1) / 2) - 1;
                 this.y = roomLayout.GetLength(0) - 1;
@@ -38,6 +40,7 @@ namespace BingingOfRandy
             {
                 mapX += x;
                 roomLayout = Program.rooms[mapX, mapY].layout;
+                BulletHandler.bullets.Clear();
 
                 this.x = 0;
                 this.y = (int)Math.Ceiling((float)roomLayout.GetLength(0) / 2) - 1;
@@ -50,6 +53,7 @@ namespace BingingOfRandy
             {
                 mapY += y;
                 roomLayout = Program.rooms[mapX, mapY].layout;
+                BulletHandler.bullets.Clear();
 
                 this.x = (int)Math.Ceiling((float)roomLayout.GetLength(1) / 2) - 1;
                 this.y = 0;
@@ -62,6 +66,7 @@ namespace BingingOfRandy
             {
                 mapX += x;
                 roomLayout = Program.rooms[mapX, mapY].layout;
+                BulletHandler.bullets.Clear();
 
                 this.x = roomLayout.GetLength(1) - 1;
                 this.y = (int)Math.Ceiling((float)roomLayout.GetLength(0) / 2) - 1;
@@ -90,5 +95,6 @@ namespace BingingOfRandy
 
             Program.drawPlayer = true;
         }
+
     }
 }
