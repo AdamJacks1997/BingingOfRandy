@@ -62,10 +62,12 @@ namespace BingingOfRandy.Models
                 {
                     Program.player.health -= 10;
                 }
+
                 if (collider is Colliders.Enemy)
                 {
                     //Damage enemy
                 }
+
                 DeleteBullet(bullet);
                 return;
             }
@@ -80,7 +82,6 @@ namespace BingingOfRandy.Models
 
         private static void MoveBullet(Bullet bullet)
         {
-
             switch (bullet.Direction)
             {
                 case Directions.Up:

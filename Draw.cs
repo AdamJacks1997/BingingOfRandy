@@ -150,6 +150,7 @@ namespace BingingOfRandy
         {
 
         }
+
         public static void DrawBullets()
         {
             foreach(var bullet in BulletHandler.bullets)
